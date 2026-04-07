@@ -1,0 +1,8 @@
+[[redirects]]
+  from = "/davidadmin"
+  to = "https://app.netlify.com/projects/dashing-baklava-9842b6/forms"
+  status = 301
+  force = true
+
+[build]
+  publish = "."
