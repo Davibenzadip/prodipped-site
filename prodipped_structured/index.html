@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ProDipped — Changing the Dipping Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0d0d0b;--bg2:#111110;--bg3:#181816;
+  --orange:#F26B1D;--orange2:#C9540E;
+  --white:#F5F5F0;--gray:#88887e;
+  --border:rgba(255,255,255,0.055);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:"Manrope",sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 48px;
+  background:rgba(13,13,11,0.93);
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo img{height:56px;width:auto;object-fit:contain;display:block;filter:drop-shadow(0 2px 10px rgba(242,107,29,0.25))}
+.nav-cta{
+  background:var(--orange);color:#fff;font-weight:700;font-size:12px;
+  letter-spacing:.1em;text-transform:uppercase;padding:13px 32px;
+  border:none;border-radius:3px;text-decoration:none;
+  box-shadow:0 4px 18px rgba(242,107,29,0.3);transition:background .18s,transform .15s;
+}
+.nav-cta:hover{background:var(--orange2);transform:translateY(-1px)}
+
+/* HERO */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:120px 24px 80px;text-align:center;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:url('images/hero-bg.jpg');
+  background-size:cover;background-position:center 42%;
+  animation:slowZoom 14s ease-in-out infinite alternate;
+  transform-origin:center center;
+}
+@keyframes slowZoom{from{transform:scale(1.0)}to{transform:scale(1.07)}}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 75% 80% at 50% 52%,rgba(13,13,11,0.5) 0%,rgba(13,13,11,0.8) 58%,rgba(13,13,11,0.97) 100%),
+    linear-gradient(to bottom,rgba(13,13,11,0.6) 0%,rgba(13,13,11,0.18) 35%,rgba(13,13,11,0.18) 65%,rgba(13,13,11,0.92) 100%);
+}
+.hero-content{position:relative;z-index:2}
+.hero-tag{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--orange);border:1px solid rgba(242,107,29,.5);
+  padding:5px 18px;border-radius:2px;margin-bottom:28px;
+}
+.hero-h1{
+  font-family:"Bebas Neue",sans-serif;
+  font-size:clamp(82px,12vw,155px);
+  line-height:.88;letter-spacing:.02em;color:var(--white);
+  max-width:900px;margin-bottom:26px;
+  text-shadow:0 4px 32px rgba(0,0,0,0.7);
+}
+.hero-h1 em{color:var(--orange);font-style:normal}
+.hero-sub{font-size:clamp(15px,1.6vw,18px);color:rgba(245,245,240,0.72);max-width:420px;margin:0 auto 44px;font-weight:500;line-height:1.65}
+.hero-cta{
+  display:inline-block;background:var(--orange);color:#fff;
+  font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  padding:18px 48px;border-radius:3px;text-decoration:none;
+  box-shadow:0 8px 32px rgba(242,107,29,.38);transition:background .18s,transform .18s;
+}
+.hero-cta:hover{background:var(--orange2);transform:translateY(-2px)}
+
+/* TICKER */
+.ticker-wrap{background:var(--orange);overflow:hidden;padding:13px 0;white-space:nowrap}
+.ticker{display:inline-flex;animation:ticker 22s linear infinite}
+.ticker span{font-family:"Bebas Neue",sans-serif;font-size:18px;letter-spacing:.18em;color:#fff;padding:0 40px;opacity:.92}
+.ticker span.dot{opacity:.5;padding:0 4px}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+section{padding:100px 24px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;display:block}
+.section-h2{font-family:"Bebas Neue",sans-serif;font-size:clamp(46px,6vw,80px);line-height:.93;letter-spacing:.03em;color:var(--white);margin-bottom:16px}
+
+/* PRODUCT */
+#product{background:var(--bg2)}
+.prod-head{max-width:1100px;margin:0 auto;text-align:center;margin-bottom:64px}
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;max-width:1200px;margin:0 auto}
+.pcard{background:var(--bg3);display:flex;flex-direction:column;transition:background .22s}
+.pcard:hover{background:#1c1c1a}
+.pcard-photo{overflow:hidden;width:100%;aspect-ratio:16/10}
+.pcard-photo img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease;display:block}
+.pcard:hover .pcard-photo img{transform:scale(1.03)}
+.pcard-body{padding:32px 36px 44px}
+.pcard-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;display:block}
+.pcard-title{font-family:"Bebas Neue",sans-serif;font-size:34px;letter-spacing:.05em;color:var(--white);margin-bottom:10px}
+.pcard-desc{font-size:14px;color:var(--gray);font-weight:500;line-height:1.65}
+
+/* COMPARISON */
+#compare{
+  background:linear-gradient(180deg,var(--bg2) 0%,#c8c4be 20%,#dedad5 50%,#c8c4be 80%,var(--bg2) 100%);
+  padding:100px 24px;
+}
+.compare-head{text-align:center;margin-bottom:72px}
+.compare-head .section-h2{color:#1a1a18;font-size:clamp(40px,5.5vw,70px)}
+.compare-head p{color:#777;font-size:16px;margin-top:14px;font-weight:500}
+.compare-grid{display:grid;grid-template-columns:1fr 60px 1fr;max-width:1060px;margin:0 auto;align-items:center;gap:0}
+.compare-side{display:flex;flex-direction:column;align-items:center;border-radius:10px;overflow:hidden}
+.compare-side.left{background:#fff;box-shadow:0 8px 52px rgba(0,0,0,0.14);border:1.5px solid #dedad4}
+.compare-side.right{background:#1a1a18;box-shadow:0 8px 52px rgba(242,107,29,0.22),0 0 0 1.5px rgba(242,107,29,0.3);border:1.5px solid rgba(242,107,29,0.3)}
+.compare-divider{display:flex;align-items:center;justify-content:center}
+.compare-vs{font-family:"Bebas Neue",sans-serif;font-size:30px;color:#aaa;letter-spacing:.1em;writing-mode:vertical-lr}
+.compare-photo{width:100%;aspect-ratio:4/3;overflow:hidden}
+.compare-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.compare-text{padding:28px 32px 32px;width:100%;display:flex;flex-direction:column;align-items:center;gap:12px}
+.compare-cup-label{font-family:"Bebas Neue",sans-serif;font-size:18px;letter-spacing:.14em;padding:7px 20px;border-radius:4px;width:100%;text-align:center}
+.compare-side.left .compare-cup-label{color:#555;background:#f5f2ee;border:1.5px solid #e0dbd4}
+.compare-side.right .compare-cup-label{color:var(--orange);background:rgba(242,107,29,0.10);border:1.5px solid rgba(242,107,29,0.28)}
+.compare-desc{font-size:13px;font-weight:600;text-align:center;line-height:1.65;max-width:260px}
+.compare-side.left .compare-desc{color:#666}
+.compare-side.right .compare-desc{color:rgba(245,245,240,0.68)}
+.compare-badge{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:13px 20px;border-radius:4px;width:100%;text-align:center}
+.compare-side.left .compare-badge{color:#cc3333;background:#fde8e8;border:1.5px solid #f0c0c0}
+.compare-side.right .compare-badge{color:#fff;background:var(--orange);border:1.5px solid var(--orange)}
+
+/* BAND */
+#band{position:relative;overflow:hidden;min-height:480px;padding:100px 24px;display:flex;align-items:center;justify-content:center}
+.band-bg{position:absolute;inset:0;background-image:url('images/band-bg.jpg');background-size:cover;background-position:center 50%}
+.band-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(13,13,11,0.45) 0%,rgba(13,13,11,0.88) 100%)}
+.band-text{position:relative;z-index:2;text-align:center;max-width:760px}
+.band-text .section-h2{font-size:clamp(52px,8vw,104px);text-shadow:0 2px 28px rgba(0,0,0,0.65)}
+.band-text p{font-size:17px;color:rgba(245,245,240,.62);font-weight:500;margin-top:16px}
+
+/* WHY */
+#why{background:var(--bg2)}
+.why-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.why-img{border-radius:4px;overflow:hidden}
+.why-img img{width:100%;height:auto;object-fit:cover;display:block;border-radius:4px}
+.why-points{display:flex;flex-direction:column;gap:36px}
+.wnum{font-family:"Bebas Neue",sans-serif;font-size:12px;letter-spacing:.18em;color:var(--orange);margin-bottom:5px}
+.wtitle{font-family:"Bebas Neue",sans-serif;font-size:36px;letter-spacing:.04em;color:var(--white);margin-bottom:6px}
+.wdesc{font-size:14px;color:var(--gray);font-weight:500;line-height:1.65}
+
+/* PROOF */
+#proof{background:var(--bg);text-align:center;padding:80px 24px}
+.proof-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:700px;margin:40px auto 0}
+.chip{background:var(--bg3);border:1px solid var(--border);border-radius:2px;padding:10px 22px;font-size:12px;font-weight:700;color:var(--gray);letter-spacing:.07em;text-transform:uppercase}
+.proof-q{max-width:500px;margin:52px auto 0;font-size:18px;font-weight:500;color:var(--white);line-height:1.55;font-style:italic}
+.proof-attr{margin-top:14px;font-size:11px;color:var(--gray);letter-spacing:.13em}
+
+/* FORM */
+#form{
+  position:relative;isolation:isolate;padding:100px 24px 120px;
+  background:linear-gradient(180deg,var(--bg) 0%,#160d06 30%,#1e1108 55%,#160d06 78%,var(--bg) 100%);
+}
+.form-inner{position:relative;z-index:1;max-width:560px;margin:0 auto;text-align:center}
+.form-inner>p{color:rgba(245,245,240,0.5);font-size:15px;margin-bottom:48px;line-height:1.65}
+.fields{display:flex;flex-direction:column;gap:13px;text-align:left}
+.fields input{
+  width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,.10);
+  color:var(--white);font-family:"Manrope",sans-serif;font-size:15px;
+  padding:16px 20px;border-radius:3px;outline:none;transition:border-color .2s;
+}
+.fields input::placeholder{color:#484440}
+.fields input:focus{border-color:var(--orange);background:rgba(242,107,29,0.05)}
+.fields button{
+  width:100%;margin-top:6px;background:var(--orange);color:#fff;
+  font-family:"Manrope",sans-serif;font-weight:800;font-size:13px;
+  letter-spacing:.14em;text-transform:uppercase;padding:19px;
+  border:none;border-radius:3px;cursor:pointer;
+  box-shadow:0 6px 28px rgba(242,107,29,.32);transition:background .18s,transform .18s;
+}
+.fields button:hover{background:var(--orange2);transform:translateY(-1px)}
+
+/* FOOTER */
+footer{
+  background:var(--bg);border-top:1px solid var(--border);
+  padding:36px 52px;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+footer img{height:52px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(242,107,29,0.2));opacity:.75}
+.finfo{font-size:12px;color:#4a4a46}
+.finfo a{color:#4a4a46;text-decoration:none}
+.finfo a:hover{color:var(--orange)}
+
+@media(max-width:900px){
+  nav{padding:10px 20px}
+  .prod-grid{grid-template-columns:1fr}
+  .compare-grid{grid-template-columns:1fr}
+  .compare-divider{padding:16px 0}
+  .compare-vs{writing-mode:horizontal-tb}
+  .compare-side.left{border-radius:10px 10px 0 0}
+  .compare-side.right{border-radius:0 0 10px 10px}
+  .why-inner{grid-template-columns:1fr;gap:48px}
+  footer{padding:28px 20px;flex-direction:column;align-items:flex-start}
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp .85s ease both}
+.d1{animation-delay:.08s}.d2{animation-delay:.2s}.d3{animation-delay:.34s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><img src="images/logo.png" alt="ProDipped"/></div>
+  <a class="nav-cta" href="#form">Request a preorder</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-tag fu">For Restaurants &amp; Food Operators</span>
+    <h1 class="hero-h1 fu d1">Changing<br/>the <em>dipping</em><br/>game.</h1>
+    <p class="hero-sub fu d2">A simple sauce cup engineered for a better and smoother dip. Better angle, cleaner experience.</p>
+    <a class="hero-cta fu d3" href="#form">Request a preorder</a>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>Better dip angle</span><span class="dot">&middot;</span>
+    <span>Smoother experience</span><span class="dot">&middot;</span>
+    <span>Snap-shut lid</span><span class="dot">&middot;</span>
+    <span>Clean takeout</span><span class="dot">&middot;</span>
+    <span>Easy switch</span><span class="dot">&middot;</span>
+    <span>Same price range</span><span class="dot">&middot;</span>
+    <span>Better dip angle</span><span class="dot">&middot;</span>
+    <span>Smoother experience</span><span class="dot">&middot;</span>
+    <span>Snap-shut lid</span><span class="dot">&middot;</span>
+    <span>Clean takeout</span><span class="dot">&middot;</span>
+    <span>Easy switch</span><span class="dot">&middot;</span>
+    <span>Same price range</span><span class="dot">&middot;</span>
+  </div>
+</div>
+
+<section id="product">
+  <div class="prod-head">
+    <span class="section-label">The product</span>
+    <h2 class="section-h2">Built different.<br/>On purpose.</h2>
+  </div>
+  <div class="prod-grid">
+    <div class="pcard reveal">
+      <div class="pcard-photo"><img src="images/card1.jpg" alt="Wing dipping into ProDipped"/></div>
+      <div class="pcard-body">
+        <span class="pcard-label">In action</span>
+        <div class="pcard-title">Engineered for the dip</div>
+        <div class="pcard-desc">The shape fits how you naturally hold a wing. Sauce exactly where it needs to be, every single time.</div>
+      </div>
+    </div>
+    <div class="pcard reveal">
+      <div class="pcard-photo"><img src="images/card2.jpg" alt="Better dip angle close up"/></div>
+      <div class="pcard-body">
+        <span class="pcard-label">How it works</span>
+        <div class="pcard-title">Better dip angle</div>
+        <div class="pcard-desc">Deeper on the sauce side, shallower on the wing side. Full coverage every dip — no tilting, no wasted sauce.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="compare-head reveal">
+    <span class="section-label">Side by side</span>
+    <h2 class="section-h2">Same sauce.<br/><em style="color:var(--orange);font-style:normal">Completely different dip.</em></h2>
+    <p>The standard cup was never built for wings. This one was.</p>
+  </div>
+  <div class="compare-grid reveal">
+    <div class="compare-side left">
+      <div class="compare-photo"><img src="images/compare-bad.jpg" alt="Standard sauce cups"/></div>
+      <div class="compare-text">
+        <div class="compare-cup-label">Standard Cup</div>
+        <div class="compare-desc">Round. Shallow. Built for condiments, not wings. Tip barely reaches the sauce.</div>
+        <div class="compare-badge">&#10005;&nbsp; Tip only — partial coverage</div>
+      </div>
+    </div>
+    <div class="compare-divider"><span class="compare-vs">VS</span></div>
+    <div class="compare-side right">
+      <div class="compare-photo"><img src="images/compare-good.jpg" alt="ProDipped full coverage"/></div>
+      <div class="compare-text">
+        <div class="compare-cup-label">ProDipped</div>
+        <div class="compare-desc">Asymmetric. Deeper on one side. Designed around the exact angle you dip a wing.</div>
+        <div class="compare-badge">&#10003;&nbsp; Full coverage every time</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="band">
+  <div class="band-bg"></div>
+  <div class="band-text">
+    <span class="section-label">Better dip. Cleaner experience.</span>
+    <h2 class="section-h2">Same cost.<br/><em style="color:var(--orange);font-style:normal">Way better</em><br/>experience.</h2>
+    <p>Your customers feel the difference before they even take a bite.</p>
+  </div>
+</section>
+
+<section id="why">
+  <div class="why-inner">
+    <div class="why-img reveal"><img src="images/why.jpg" alt="ProDipped in use"/></div>
+    <div class="why-points">
+      <span class="section-label">Why switch</span>
+      <h2 class="section-h2">Simple<br/>math.</h2>
+      <div class="reveal">
+        <div class="wnum">01</div>
+        <div class="wtitle">Same price range</div>
+        <div class="wdesc">No premium cost. Comparable to what you already pay for standard sauce cups.</div>
+      </div>
+      <div class="reveal">
+        <div class="wnum">02</div>
+        <div class="wtitle">Better experience</div>
+        <div class="wdesc">Customers notice. A better dip makes the whole meal feel more premium — zero extra effort from you.</div>
+      </div>
+      <div class="reveal">
+        <div class="wnum">03</div>
+        <div class="wtitle">Easy switch</div>
+        <div class="wdesc">Drop-in replacement. Same workflow, same ordering. Just a better product on the table.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <span class="section-label" style="display:block;margin-bottom:14px">Early adopters</span>
+  <h2 class="section-h2">Restaurants<br/>already testing it.</h2>
+  <div class="proof-chips">
+    <div class="chip reveal">Wing Spots</div>
+    <div class="chip reveal">Sports Bars</div>
+    <div class="chip reveal">Ghost Kitchens</div>
+    <div class="chip reveal">Fast Casual</div>
+    <div class="chip reveal">Food Trucks</div>
+  </div>
+  <p class="proof-q">&ldquo;The shape just makes sense. Customers pick it up and immediately get it &mdash; no explanation needed.&rdquo;</p>
+  <p class="proof-attr">&mdash; LOCAL RESTAURANT OPERATOR &middot; EARLY TESTER</p>
+</section>
+
+<section id="form">
+  <div class="form-inner">
+    <span class="section-label">Get in early</span>
+    <h2 class="section-h2">Request a<br/>preorder.</h2>
+    <p>Tell us where you are at. We will reach out to set up a sample run and walk you through pricing.</p>
+    <form name="preorder" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+      <input type="hidden" name="form-name" value="preorder"/>
+      <p style="display:none"><input name="bot-field"/></p>
+      <div class="fields">
+        <input type="text"  name="name"       placeholder="Your name"       required autocomplete="name"/>
+        <input type="text"  name="restaurant" placeholder="Restaurant name"  required autocomplete="organization"/>
+        <input type="tel"   name="phone"      placeholder="Phone number"     required autocomplete="tel"/>
+        <input type="email" name="email"      placeholder="Email address"    required autocomplete="email"/>
+        <button type="submit">Request a preorder &rarr;</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <img src="images/logo.png" alt="ProDipped"/>
+  <div class="finfo">
+    <p>&copy; 2025 ProDipped. All rights reserved.</p>
+    <p style="margin-top:4px"><a href="mailto:dbenzaquenw@gmail.com">dbenzaquenw@gmail.com</a></p>
+  </div>
+</footer>
+
+<script>
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("in")});
+},{threshold:0.1});
+document.querySelectorAll(".reveal").forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>
